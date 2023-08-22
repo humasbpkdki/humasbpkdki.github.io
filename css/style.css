@@ -1,0 +1,94 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/* Body */
+body {
+    background-image: url(../img/bpk-pwk-jakarta.jpeg);
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body .link-tree {
+    background-color: rgba(0, 0, 0, 0.263);
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    width: 50%;
+}
+
+body .btn-linktree {
+    border-radius: 50px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.308);
+}
+
+.link-tree .logo {
+    border-radius: 15px;
+}
+
+.link-tree .btn-linktree:hover .btn-hover {
+    transform: translateX(0);
+}
+
+.link-tree .btn-linktree .btn-hover {
+    transform: translateY(-100%);
+    background-color: #b38001;
+    border-radius: 50px;
+    transition: .3s ease-in-out;
+}
+
+.link-tree .collapse .list-group .list-group-item {
+    background-color: #b38001;
+    color: white;
+    border: none;
+    transition: .3s all;
+}
+
+.link-tree .collapse .list-group .list-group-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 5px 1px rgba(0, 0, 0, 0.263);
+}
+
+.link-tree .social-media {
+    font-size: 2em;
+}
+
+.link-tree .social-media a {
+    color: white;
+    padding: 15px 18px;
+    border-radius: 50%;
+    transition: .3s all;
+}
+
+.link-tree .social-media a:hover {
+    background-color: white;
+    color: #b38001;
+}
+
+/* Responsive Breakpoint */
+/* Tablet */
+@media (min-width: 768px) and (max-width: 992px) {
+    body .link-tree {
+        width: 70%;
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    body .link-tree {
+        width: 80%;
+    }
+
+    body .btn-linktree {
+        border-radius: 25px;
+    }
+}
+
+@media (max-width: 350px) {
+    body .btn-linktree {
+        font-size: .8em;
+    }
+
+    .judul h2 {
+        font-size: 1.3em;
+    }
+}
