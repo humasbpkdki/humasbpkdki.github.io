@@ -36,6 +36,10 @@ body .btn-linktree {
     transition: .3s ease-in-out;
 }
 
+.link-tree .bold {
+    font-weight: 600;
+}
+
 .link-tree .collapse .list-group .list-group-item {
     background-color: #b38001;
     color: white;
