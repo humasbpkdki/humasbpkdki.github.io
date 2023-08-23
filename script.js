@@ -31,17 +31,37 @@ document.addEventListener("DOMContentLoaded", function() {
       }
    });
 
-   // Event listener untuk tombol "Masuk" di link <a>
-   const linkButton = document.querySelector(".list-group-item");
-   linkButton.addEventListener("click", function(event) {
+   // Event listener untuk tombol "Foto"
+   const fotoButton = document.querySelector(".list-group-item:nth-child(1)"); 
+   fotoButton.addEventListener("click", function(event) {
       const passwordCorrect = sessionStorage.getItem("passwordCorrect");
       if (passwordCorrect === "true") {
-         // Jika password sudah dimasukkan dengan benar, arahkan ke halaman berhasil.html
          event.preventDefault();
          window.location.href = "berhasil.html";
       }
    });
 
+   // Event listener untuk tombol "Flyer"
+   const flyerButton = document.querySelector(".list-group-item:nth-child(3)"); 
+   flyerButton.addEventListener("click", function(event) {
+      const passwordCorrect = sessionStorage.getItem("passwordCorrect");
+      if (passwordCorrect === "true") {
+         event.preventDefault();
+         window.location.href = "berhasil.html";
+      }
+   });
+
+   // Event listener untuk tombol "Backdrop"
+   const backdropButton = document.querySelector(".list-group-item:nth-child(4)"); 
+   backdropButton.addEventListener("click", function(event) {
+      const passwordCorrect = sessionStorage.getItem("passwordCorrect");
+      if (passwordCorrect === "true") {
+         event.preventDefault();
+         window.location.href = "berhasil.html";
+      }
+   });
+
+   // Lihat Password
    showPasswordCheckbox.addEventListener("change", function() {
       if (showPasswordCheckbox.checked) {
          passwordInput.type = "text";
@@ -50,3 +70,4 @@ document.addEventListener("DOMContentLoaded", function() {
       }
    });
 });
+
