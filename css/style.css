@@ -74,6 +74,17 @@ body .btn-linktree {
     body .link-tree {
         width: 70%;
     }
+
+    body .btn-linktree {
+        border-radius: 25px;
+    }
+
+    .link-tree .btn-linktree .btn-hover {
+        transform: translateY(-100%);
+        background-color: #b38001;
+        border-radius: 25px;
+        transition: .3s ease-in-out;
+    }
 }
 
 /* Mobile */
@@ -83,7 +94,14 @@ body .btn-linktree {
     }
 
     body .btn-linktree {
-        border-radius: 25px;
+        border-radius: 15px;
+    }
+
+    .link-tree .btn-linktree .btn-hover {
+        transform: translateY(-100%);
+        background-color: #b38001;
+        border-radius: 15px;
+        transition: .3s ease-in-out;
     }
 }
 
@@ -94,5 +112,16 @@ body .btn-linktree {
 
     .judul h2 {
         font-size: 1.3em;
+    }
+
+    body .btn-linktree {
+        border-radius: 15px;
+    }
+
+    .link-tree .btn-linktree .btn-hover {
+        transform: translateY(-100%);
+        background-color: #b38001;
+        border-radius: 15px;
+        transition: .3s ease-in-out;
     }
 }
