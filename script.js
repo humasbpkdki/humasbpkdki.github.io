@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
          window.location.href = "berhasil.html";
       } else {
          // Tampilkan alert, reset form, dan atur waktu munculnya
-         alert.textContent = "Maaf Password yang anda masukan salah, segera hubungi Subbag Humas!";
+         alert.textContent = "Maaf Password yang anda masukan salah, silahkan hubungi Subbag Humas!";
          alert.classList.remove('d-none');
          form.reset();
          setTimeout(function() {
