@@ -4,24 +4,62 @@ document.addEventListener("DOMContentLoaded", function() {
    const form = document.getElementById("passwordForm");
    const passwordInput = document.getElementById("password");
    const showPasswordCheckbox = document.getElementById("showPassword");
+   const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
 
+   // Menyembunyikan alert saat halaman dimuat
    alert.classList.add('d-none');
 
-   submitPasswordButton.addEventListener("click", function() {
-      const passwordInput = document.getElementById("password").value;
-      const correctPassword = "humasdki"; 
+   const passwordMap = {
+      "https://1drv.ms/f/s!AkX4lxPqYPPDgg2MhxJHZvrsZ89P?e=iG3MUX": "humasdkifoto",
+      "https://1drv.ms/f/s!AkX4lxPqYPPDgbpkP8vwr887Q8Bbvw?e=polJ5t": "humasdkiflyer",
+      "https://1drv.ms/f/s!AkX4lxPqYPPDgbpj_J__W0hoCUqWcw?e=ZfJ5yX": "humasdkibackdrop"
+   };
 
-      if (passwordInput === "") {
+
+   // Mendapatkan tombol-tombol <a> dan menambahkan event listener
+   const buttons = document.querySelectorAll(".toggleModal");
+
+   function hasAccessToLink(url) {
+      const hasAccess = sessionStorage.getItem(url);
+      return hasAccess === "true";
+   }
+
+   buttons.forEach(button => {
+      const targetUrl = button.getAttribute("data-url");
+      const targetPassword = passwordMap[targetUrl];
+      if (hasAccessToLink(targetUrl)) {
+         button.querySelector(".kunci-img").style.display = "none";
+      }
+      button.addEventListener("click", function(event) {
+         event.preventDefault();
+   
+         submitPasswordButton.setAttribute("data-url", targetUrl);
+   
+         const hasAccess = sessionStorage.getItem(targetUrl);
+         if (hasAccess === "true") {
+            window.location.href = targetUrl;
+         } else {
+            modal.show();
+         }
+      });
+   });
+
+   submitPasswordButton.addEventListener("click", function() {
+      const passwordInputValue = passwordInput.value;
+      const targetUrl = submitPasswordButton.getAttribute("data-url");
+      const correctPassword = passwordMap[targetUrl];
+
+      if (passwordInputValue === "") {
          alert.textContent = "Password harus diisi!";
          alert.classList.remove('d-none');
          setTimeout(function() {
             alert.classList.add('d-none');
          }, 3000);
-      } else if (passwordInput === correctPassword) {
-         sessionStorage.setItem("passwordCorrect", true); // Simpan informasi password benar
-         window.location.href = "berhasil.html";
+      } else if (passwordInputValue === correctPassword) {
+         sessionStorage.setItem(targetUrl, "true");
+         modal.hide();
+         window.location.href = targetUrl;
       } else {
-         // Tampilkan alert, reset form, dan atur waktu munculnya
          alert.textContent = "Maaf Password yang anda masukan salah, silahkan hubungi Subbag Humas!";
          alert.classList.remove('d-none');
          form.reset();
@@ -31,37 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
    });
 
-   // Event listener untuk tombol "Foto"
-   const fotoButton = document.querySelector(".list-group-item:nth-child(1)"); 
-   fotoButton.addEventListener("click", function(event) {
-      const passwordCorrect = sessionStorage.getItem("passwordCorrect");
-      if (passwordCorrect === "true") {
-         event.preventDefault();
-         window.location.href = "berhasil.html";
-      }
-   });
-
-   // Event listener untuk tombol "Flyer"
-   const flyerButton = document.querySelector(".list-group-item:nth-child(3)"); 
-   flyerButton.addEventListener("click", function(event) {
-      const passwordCorrect = sessionStorage.getItem("passwordCorrect");
-      if (passwordCorrect === "true") {
-         event.preventDefault();
-         window.location.href = "berhasil.html";
-      }
-   });
-
-   // Event listener untuk tombol "Backdrop"
-   const backdropButton = document.querySelector(".list-group-item:nth-child(4)"); 
-   backdropButton.addEventListener("click", function(event) {
-      const passwordCorrect = sessionStorage.getItem("passwordCorrect");
-      if (passwordCorrect === "true") {
-         event.preventDefault();
-         window.location.href = "berhasil.html";
-      }
-   });
-
-   // Lihat Password
+   // Event listener untuk checkbox tampilkan password
    showPasswordCheckbox.addEventListener("change", function() {
       if (showPasswordCheckbox.checked) {
          passwordInput.type = "text";
@@ -69,5 +77,9 @@ document.addEventListener("DOMContentLoaded", function() {
          passwordInput.type = "password";
       }
    });
-});
 
+   // Event listener saat modal ditutup
+   modal._element.addEventListener('hidden.bs.modal', function () {
+      form.reset();
+   });
+});
