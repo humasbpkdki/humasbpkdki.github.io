@@ -68,6 +68,10 @@ body .btn-linktree {
     color: #b38001;
 }
 
+.kunci-img.active {
+    display: none;
+}
+
 /* Responsive Breakpoint */
 /* Tablet */
 @media (min-width: 768px) and (max-width: 992px) {
