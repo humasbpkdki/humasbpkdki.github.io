@@ -41,10 +41,6 @@ document.addEventListener("DOMContentLoaded", function() {
          } else {
             modal.show();
          }
-
-         // Mengatur tampilan gambar kunci.png pada button yang diklik
-         const kunciImg = button.querySelector(".kunci-img");
-         kunciImg.classList.add("active");
       });
    });
 
@@ -62,16 +58,6 @@ document.addEventListener("DOMContentLoaded", function() {
       } else if (passwordInputValue === correctPassword) {
          sessionStorage.setItem(targetUrl, "true");
          modal.hide();
-
-         // Menghapus tampilan gambar kunci.png pada button yang diklik
-         const buttons = document.querySelectorAll(".toggleModal");
-         buttons.forEach(button => {
-            const kunciImg = button.querySelector(".kunci-img");
-            if (button.getAttribute("data-url") === targetUrl) {
-               kunciImg.classList.remove("active");
-            }
-         });
-         
          window.location.href = targetUrl;
       } else {
          alert.textContent = "Maaf Password yang anda masukan salah, silahkan hubungi Subbag Humas!";
