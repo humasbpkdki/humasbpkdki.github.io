@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
    const submitPasswordButton = document.getElementById("submitPasswordButton");
    const alert = document.querySelector(".my-alert");
    const form = document.getElementById("passwordForm");
@@ -31,12 +31,12 @@ document.addEventListener("DOMContentLoaded", function() {
       if (hasAccessToLink(targetUrl)) {
          button.querySelector(".kunci-img").style.display = "none";
       }
-      
-      button.addEventListener("click", function(event) {
+
+      button.addEventListener("click", function (event) {
          event.preventDefault();
-   
+
          submitPasswordButton.setAttribute("data-url", targetUrl);
-   
+
          const hasAccess = sessionStorage.getItem(targetUrl);
          if (hasAccess === "true") {
             window.location.href = targetUrl;
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
       });
    });
 
-   submitPasswordButton.addEventListener("click", function() {
+   submitPasswordButton.addEventListener("click", function () {
       const passwordInputValue = passwordInput.value;
       const targetUrl = submitPasswordButton.getAttribute("data-url");
       const correctPassword = passwordMap[targetUrl];
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
       if (passwordInputValue === "") {
          alert.textContent = "Password harus diisi!";
          alert.classList.remove('d-none');
-         setTimeout(function() {
+         setTimeout(function () {
             alert.classList.add('d-none');
          }, 3000);
       } else if (passwordInputValue === correctPassword) {
@@ -65,14 +65,14 @@ document.addEventListener("DOMContentLoaded", function() {
          alert.textContent = "Maaf Password yang anda masukan salah, silahkan hubungi Subbag Humas!";
          alert.classList.remove('d-none');
          form.reset();
-         setTimeout(function() {
+         setTimeout(function () {
             alert.classList.add('d-none');
          }, 3000);
       }
    });
 
    // Event listener untuk checkbox tampilkan password
-   showPasswordCheckbox.addEventListener("change", function() {
+   showPasswordCheckbox.addEventListener("change", function () {
       if (showPasswordCheckbox.checked) {
          passwordInput.type = "text";
       } else {
@@ -85,7 +85,15 @@ document.addEventListener("DOMContentLoaded", function() {
       form.reset();
    });
 
-   refreshButton.addEventListener("click", function() {
-      window.location.href = window.location.href; // Memaksa browser untuk merefresh halaman
+   refreshButton.addEventListener("click", function (event) {
+      event.preventDefault();
+
+      const targetUrl = refreshButton.getAttribute("data-url");
+      const hasAccess = sessionStorage.getItem(targetUrl);
+      if (hasAccess === "true") {
+         window.location.href = targetUrl;
+      } else {
+         modal.show();
+      }
    });
 });
