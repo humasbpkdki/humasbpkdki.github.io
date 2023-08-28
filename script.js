@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
    alert.classList.add('d-none');
 
    const passwordMap = {
-      "https://1drv.ms/f/s!AkX4lxPqYPPDgg2MhxJHZvrsZ89P?e=iG3MUX": "humasdkifoto",
+      "https://1drv.ms/f/s!AkX4lxPqYPPDgg2MhxJHZvrsZ89P?e=iG3MUX": "humasdkifotovideo",
       "https://1drv.ms/f/s!AkX4lxPqYPPDgbpkP8vwr887Q8Bbvw?e=polJ5t": "humasdkiflyer",
       "https://1drv.ms/f/s!AkX4lxPqYPPDgbpj_J__W0hoCUqWcw?e=ZfJ5yX": "humasdkibackdrop"
    };
