@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
       if (hasAccessToLink(targetUrl)) {
          button.querySelector(".kunci-img").style.display = "none";
       }
+      
       button.addEventListener("click", function(event) {
          event.preventDefault();
    
