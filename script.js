@@ -86,11 +86,14 @@ document.addEventListener("DOMContentLoaded", function () {
    });
 
    // Mengecek saat halaman kembali dari halaman lain
-   window.addEventListener("pageshow", function (event) {
-      const hasAccess = sessionStorage.getItem(event.target.location.href);
+   window.onpageshow = function (event) {
+      if (event.persisted) {
+         const hasAccess = sessionStorage.getItem(event.target.location.href);
 
-      if (hasAccess === "true") {
-         window.location.reload();
+         if (hasAccess === "true") {
+            sessionStorage.removeItem(event.target.location.href); // Menghapus status akses saat halaman direfresh
+            window.location.reload();
+         }
       }
-   });
+   };
 });
