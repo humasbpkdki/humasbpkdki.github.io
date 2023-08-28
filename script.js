@@ -82,11 +82,4 @@ document.addEventListener("DOMContentLoaded", function() {
    modal._element.addEventListener('hidden.bs.modal', function () {
       form.reset();
    });
-
-   // Event listener untuk refresh halaman setelah kembali dari previous
-   window.addEventListener('pageshow', function(event) {
-      if (event.persisted) {
-         location.reload();
-      }
-   });
 });
