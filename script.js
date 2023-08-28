@@ -86,13 +86,11 @@ document.addEventListener("DOMContentLoaded", function () {
    });
 
    // Mengecek saat halaman kembali dari halaman lain
-   window.onpageshow = function (event) {
-      if (event.persisted) {
-         const hasAccess = sessionStorage.getItem(event.target.location.href);
+   window.addEventListener("pageshow", function (event) {
+      const hasAccess = sessionStorage.getItem(event.target.location.href);
 
-         if (hasAccess === "true") {
-            window.location.reload();
-         }
+      if (hasAccess === "true") {
+         window.location.reload();
       }
-   };
+   });
 });
