@@ -83,6 +83,9 @@ document.addEventListener("DOMContentLoaded", function () {
    // Event listener saat modal ditutup
    modal._element.addEventListener('hidden.bs.modal', function () {
       form.reset();
+      if (sessionStorage.getItem(submitPasswordButton.getAttribute("data-url")) === "true") {
+         window.location.reload();
+      }
    });
 
    refreshButton.addEventListener("click", function (event) {
