@@ -84,4 +84,13 @@ document.addEventListener("DOMContentLoaded", function () {
    modal._element.addEventListener('hidden.bs.modal', function () {
       form.reset();
    });
+
+   // Mengecek saat halaman kembali dari halaman lain
+   window.onpageshow = function (event) {
+      const hasAccess = sessionStorage.getItem(event.target.location.href);
+
+      if (hasAccess === "true") {
+         window.location.reload();
+      }
+   };
 });
