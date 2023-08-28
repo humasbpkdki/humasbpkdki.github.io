@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
    const passwordInput = document.getElementById("password");
    const showPasswordCheckbox = document.getElementById("showPassword");
    const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+   const refreshButton = document.getElementById("refreshButton");
 
    // Menyembunyikan alert saat halaman dimuat
    alert.classList.add('d-none');
@@ -84,10 +85,7 @@ document.addEventListener("DOMContentLoaded", function() {
       form.reset();
    });
 
-   // Event listener untuk refresh halaman setelah kembali dari previous
-   window.addEventListener('pageshow', function(event) {
-      if (event.persisted) {
-         location.reload();
-      }
+   refreshButton.addEventListener("click", function() {
+      window.location.href = window.location.href; // Memaksa browser untuk merefresh halaman
    });
 });
