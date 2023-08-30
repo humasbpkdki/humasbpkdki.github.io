@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
    });
 
    // Event listener untuk pageshow
-   window.addEventListener("pageshow", function (event) {
+   window.addEventListener("popstate", function (event) {
       if (event.persisted) {
          const hasAccess = sessionStorage.getItem(event.target.location.href);
 
