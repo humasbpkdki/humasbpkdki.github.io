@@ -85,17 +85,17 @@ document.addEventListener("DOMContentLoaded", function () {
       form.reset();
    });
 
-   // Mengecek saat halaman kembali dari halaman lain
-   window.onpageshow = function (event) {
+   // Event listener untuk pageshow
+   window.addEventListener("pageshow", function (event) {
       if (event.persisted) {
          const hasAccess = sessionStorage.getItem(event.target.location.href);
 
          if (hasAccess === "true") {
-            sessionStorage.removeItem(event.target.location.href); // Menghapus status akses saat halaman direfresh
+            sessionStorage.removeItem(event.target.location.href);
             window.location.reload();
          }
       }
-   };
+   });
 
    passwordInput.addEventListener("keyup", function (event) {
       if (event.key === "Enter") {
