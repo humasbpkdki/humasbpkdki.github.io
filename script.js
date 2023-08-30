@@ -86,16 +86,16 @@ document.addEventListener("DOMContentLoaded", function () {
    });
 
    // Event listener untuk pageshow
-   window.addEventListener("popstate", function (event) {
+   window.addEventListener("pageshow", function (event) {
       if (event.persisted) {
          const hasAccess = sessionStorage.getItem(event.target.location.href);
-
+   
          if (hasAccess === "true") {
             sessionStorage.removeItem(event.target.location.href);
             window.location.reload();
          }
       }
-   });
+   });   
 
    passwordInput.addEventListener("keyup", function (event) {
       if (event.key === "Enter") {
