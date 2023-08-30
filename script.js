@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
    };
 
-   passwordInput.addEventListener("keydown", function (event) {
+   passwordInput.addEventListener("keyup", function (event) {
       if (event.key === "Enter") {
          event.preventDefault();
          submitPasswordButton.click();
