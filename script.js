@@ -5,9 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
    const passwordInput = document.getElementById("password");
    const showPasswordCheckbox = document.getElementById("showPassword");
    const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
-   const refreshButton = document.getElementById("refreshButton");
+   const buttons = document.querySelectorAll(".toggleModal");
 
-   // Menyembunyikan alert saat halaman dimuat
    alert.classList.add('d-none');
 
    const passwordMap = {
@@ -15,15 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
       "https://1drv.ms/f/s!AkX4lxPqYPPDgbpkP8vwr887Q8Bbvw?e=polJ5t": "humasdkiflyer",
       "https://1drv.ms/f/s!AkX4lxPqYPPDgbpj_J__W0hoCUqWcw?e=ZfJ5yX": "humasdkibackdrop"
    };
-
-
-   // Mendapatkan tombol-tombol <a> dan menambahkan event listener
-   const buttons = document.querySelectorAll(".toggleModal");
-
-   function hasAccessToLink(url) {
-      const hasAccess = sessionStorage.getItem(url);
-      return hasAccess === "true";
-   }
 
    buttons.forEach(button => {
       const targetUrl = button.getAttribute("data-url");
@@ -34,11 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       button.addEventListener("click", function (event) {
          event.preventDefault();
-
          submitPasswordButton.setAttribute("data-url", targetUrl);
-
-         const hasAccess = sessionStorage.getItem(targetUrl);
-         if (hasAccess === "true") {
+         const hasAccess = hasAccessToLink(targetUrl);
+         if (hasAccess) {
             window.location.href = targetUrl;
          } else {
             modal.show();
@@ -52,50 +40,34 @@ document.addEventListener("DOMContentLoaded", function () {
       const correctPassword = passwordMap[targetUrl];
 
       if (passwordInputValue === "") {
-         alert.textContent = "Password harus diisi!";
-         alert.classList.remove('d-none');
-         setTimeout(function () {
-            alert.classList.add('d-none');
-         }, 3000);
+         showAlert("Password harus diisi!");
       } else if (passwordInputValue === correctPassword) {
          sessionStorage.setItem(targetUrl, "true");
          modal.hide();
          window.location.href = targetUrl;
       } else {
-         alert.textContent = "Maaf Password yang anda masukan salah, silahkan hubungi Subbag Humas!";
-         alert.classList.remove('d-none');
+         showAlert("Maaf Password yang anda masukan salah, silahkan hubungi Subbag Humas!");
          form.reset();
-         setTimeout(function () {
-            alert.classList.add('d-none');
-         }, 3000);
       }
    });
 
-   // Event listener untuk checkbox tampilkan password
    showPasswordCheckbox.addEventListener("change", function () {
-      if (showPasswordCheckbox.checked) {
-         passwordInput.type = "text";
-      } else {
-         passwordInput.type = "password";
-      }
+      passwordInput.type = showPasswordCheckbox.checked ? "text" : "password";
    });
 
-   // Event listener saat modal ditutup
    modal._element.addEventListener('hidden.bs.modal', function () {
       form.reset();
    });
 
-   // Event listener untuk pageshow
    window.addEventListener("pageshow", function (event) {
       if (event.persisted) {
-         const hasAccess = sessionStorage.getItem(event.target.location.href);
-   
-         if (hasAccess === "true") {
+         const hasAccess = hasAccessToLink(event.target.location.href);
+         if (hasAccess) {
             sessionStorage.removeItem(event.target.location.href);
             window.location.reload();
          }
       }
-   });   
+   });
 
    passwordInput.addEventListener("keydown", function (event) {
       if (event.key === "Enter") {
@@ -103,4 +75,17 @@ document.addEventListener("DOMContentLoaded", function () {
          submitPasswordButton.click();
       }
    });
+
+   function hasAccessToLink(url) {
+      const hasAccess = sessionStorage.getItem(url);
+      return hasAccess === "true";
+   }
+
+   function showAlert(message) {
+      alert.textContent = message;
+      alert.classList.remove('d-none');
+      setTimeout(function () {
+         alert.classList.add('d-none');
+      }, 3000);
+   }
 });
